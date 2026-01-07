@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+
+$mfe-primary: mat.$azure-palette;
+$mfe-tertiary: mat.$cyan-palette;
+
+$mfe-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: $mfe-primary,
+    tertiary: $mfe-tertiary
+  ),
+  typography: (
+    plain-family: (Roboto, "Helvetica Neue", Arial, sans-serif),
+    brand-family: (Roboto, "Helvetica Neue", Arial, sans-serif)
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+$mfe-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: $mfe-primary,
+    tertiary: $mfe-tertiary
+  ),
+  typography: (
+    plain-family: (Roboto, "Helvetica Neue", Arial, sans-serif),
+    brand-family: (Roboto, "Helvetica Neue", Arial, sans-serif)
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+@mixin mfe-material-theme() {
+  @include mat.core();
+  @include mat.all-component-themes($mfe-light-theme);
+
+  .aurora-dark {
+    @include mat.all-component-colors($mfe-dark-theme);
+    color-scheme: dark;
+  }
+
+  .aurora-light,
+  .marinho-light,
+  .citrico-light {
+    color-scheme: light;
+  }
+}

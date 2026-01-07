@@ -1,0 +1,14 @@
+{
+  "name": "remote-gde",
+  "angular": "20.0.0",
+  "libs": {
+    "@angular/material": "20.0.0",
+    "rxjs": "7.8.0",
+    "shared-logic": "1.1.1",
+    "shared-ui-lib": "0.0.1"
+  },
+  "stats": {
+    "routes": 6,
+    "menuItems": 6
+  }
+}

@@ -1,0 +1,278 @@
+@use '../../shared-ui-lib/src/lib/material-theme' as mfe-theme;
+
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import 'shared-ui-lib/tokens.css';
+@import './shell-ui.css';
+
+@include mfe-theme.mfe-material-theme();
+
+:root {
+  --color-primary: var(--mfe-primary, #2f6fed);
+  --color-on-primary: #ffffff;
+  --surface: var(--mfe-surface, #ffffff);
+  --surface-hover: var(--mfe-surface-muted, #f6f7f9);
+  --text: var(--mfe-text, #1d2b36);
+}
+
+.statusbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.6rem 1.5rem 0.7rem;
+  background: var(--shell-sidebar-bg);
+  border-top: 1px solid var(--shell-sidebar-border);
+  box-shadow: 0 -6px 14px rgba(0, 24, 30, 0.06);
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+}
+
+.statusbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.statusbar-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--shell-sidebar-muted);
+}
+
+.statusbar-active {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.status-pill {
+  --status-accent: var(--shell-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--status-accent) 40%, #e5e9ef);
+  background: color-mix(in srgb, var(--status-accent) 12%, #ffffff);
+  color: var(--status-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.status-meta {
+  font-size: 0.68rem;
+  color: var(--shell-sidebar-muted);
+  background: #ffffff;
+  border: 1px solid var(--shell-sidebar-border);
+  border-radius: 999px;
+  padding: 0.18rem 0.45rem;
+}
+
+.status-badge {
+  --status-accent: var(--shell-primary);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--status-accent) 45%, #e5e9ef);
+  background: color-mix(in srgb, var(--status-accent) 10%, #ffffff);
+  color: var(--status-accent);
+}
+
+.statusbar-list {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+}
+
+.status-card {
+  --status-accent: var(--shell-primary);
+  min-width: 210px;
+  border-radius: 12px;
+  border: 1px solid var(--shell-sidebar-border);
+  background: #ffffff;
+  padding: 0.45rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--shell-sidebar-text);
+  box-shadow: 0 4px 10px rgba(0, 24, 30, 0.06);
+}
+
+.status-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--status-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--status-accent) 18%, transparent);
+}
+
+.status-name {
+  font-size: 0.72rem;
+}
+
+.status-state {
+  margin-left: auto;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--shell-sidebar-muted);
+}
+
+.status-line {
+  font-size: 0.66rem;
+  color: var(--shell-sidebar-muted);
+}
+
+.status-libs,
+.status-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.status-libs span,
+.status-stats span {
+  background: #f4f7f9;
+  border: 1px solid var(--shell-sidebar-border);
+  border-radius: 999px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.6rem;
+  color: #4a5962;
+}
+
+.status-empty {
+  color: var(--shell-sidebar-muted);
+  font-size: 0.6rem;
+}
+
+.status-card.is-active {
+  border-color: color-mix(in srgb, var(--status-accent) 50%, #e5e9ef);
+  box-shadow: 0 10px 20px rgba(0, 24, 30, 0.12);
+}
+
+.status-card.is-loading .status-dot {
+  background: #8c9aa4;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #8c9aa4 20%, transparent);
+  animation: status-pulse 1.2s ease-in-out infinite;
+}
+
+.status-card.is-missing .status-dot {
+  background: #f0b429;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f0b429 20%, transparent);
+}
+
+.status-card.is-error .status-dot {
+  background: #f0526e;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f0526e 20%, transparent);
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.aurora-dark .statusbar {
+  background: var(--color-surface-background-medium, #16202b);
+  border-top-color: var(--color-surface-stroke-medium, #364b5d);
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.35);
+  color: var(--color-surface-text-default-high, #f0f5fb);
+}
+
+.aurora-dark .statusbar-title,
+.aurora-dark .status-line,
+.aurora-dark .status-state,
+.aurora-dark .status-empty {
+  color: var(--color-surface-text-default-medium, #c2d0dc);
+}
+
+.aurora-dark .status-card {
+  background: var(--color-surface-background-light, #223140);
+  border-color: var(--color-surface-stroke-medium, #364b5d);
+  color: var(--color-surface-text-default-high, #f0f5fb);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.aurora-dark .status-pill {
+  border-color: color-mix(
+    in srgb,
+    var(--status-accent) 45%,
+    var(--color-surface-stroke-medium, #364b5d)
+  );
+  background: color-mix(
+    in srgb,
+    var(--status-accent) 20%,
+    var(--color-surface-background-light, #223140)
+  );
+}
+
+.aurora-dark .status-meta {
+  background: var(--color-surface-background-light, #223140);
+  border-color: var(--color-surface-stroke-medium, #364b5d);
+  color: var(--color-surface-text-default-medium, #c2d0dc);
+}
+
+.aurora-dark .status-badge {
+  border-color: color-mix(
+    in srgb,
+    var(--status-accent) 45%,
+    var(--color-surface-stroke-medium, #364b5d)
+  );
+  background: color-mix(
+    in srgb,
+    var(--status-accent) 20%,
+    var(--color-surface-background-light, #223140)
+  );
+  color: var(--status-accent);
+}
+
+.aurora-dark .status-libs span,
+.aurora-dark .status-stats span {
+  background: color-mix(
+    in srgb,
+    var(--color-surface-background-light, #223140) 85%,
+    #000000
+  );
+  border-color: var(--color-surface-stroke-medium, #364b5d);
+  color: var(--color-surface-text-default-medium, #c2d0dc);
+}
+
+.aurora-dark .status-card.is-loading .status-dot {
+  background: #9fb0bd;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #9fb0bd 30%, transparent);
+}
+
+.aurora-dark .status-card.is-missing .status-dot {
+  background: #f6c34d;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f6c34d 30%, transparent);
+}
+
+.aurora-dark .status-card.is-error .status-dot {
+  background: #ff6b8a;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #ff6b8a 30%, transparent);
+}

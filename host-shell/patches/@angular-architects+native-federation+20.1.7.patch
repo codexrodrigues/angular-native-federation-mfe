@@ -1,0 +1,23 @@
+diff --git a/node_modules/@angular-architects/native-federation/src/builders/build/builder.js b/node_modules/@angular-architects/native-federation/src/builders/build/builder.js
+index 0000000..0000000 100644
+--- a/node_modules/@angular-architects/native-federation/src/builders/build/builder.js
++++ b/node_modules/@angular-architects/native-federation/src/builders/build/builder.js
+@@ -199,6 +199,18 @@
+         try {
+             federationResult = yield tslib_1.__await((0, build_2.buildForFederation)(config, fedOptions, externals));
+         }
+         catch (e) {
++            build_2.logger.error('Error during buildForFederation');
++            if (e instanceof Error) {
++                build_2.logger.error(e.stack || e.message);
++            }
++            else {
++                try {
++                    build_2.logger.error(JSON.stringify(e));
++                }
++                catch (_h) {
++                    build_2.logger.error(String(e));
++                }
++            }
+             process.exit(1);
+         }

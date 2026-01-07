@@ -1,0 +1,216 @@
+<div class="app-shell" (click)="closeTopbarMenus.emit()">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">
+        <span class="brand-name" aria-label="MFE Platform">MFE Platform</span>
+      </div>
+      <div class="platform">
+        @if (currentAppIcon) {
+          <mat-icon class="platform-icon" aria-hidden="true">{{ currentAppIcon }}</mat-icon>
+        }
+        <span class="platform-name">{{ currentAppTitle }}</span>
+        <span class="platform-separator" aria-hidden="true">|</span>
+        <span class="platform-version">10.20.01</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-menu" (click)="captureTopbarMenus.emit($event)">
+        <button
+          class="icon-button theme-trigger"
+          type="button"
+          aria-label="Tema"
+          aria-haspopup="listbox"
+          [attr.aria-expanded]="isThemeMenuOpen"
+          (click)="toggleThemeMenu.emit($event)"
+        >
+          <mat-icon aria-hidden="true">{{ currentThemeIcon }}</mat-icon>
+        </button>
+        @if (isThemeMenuOpen) {
+          <div class="theme-dropdown" role="listbox" aria-label="Temas">
+            @for (option of themeOptions; track option.id) {
+              <button
+                class="theme-option"
+                type="button"
+                role="option"
+                [attr.aria-selected]="activeTheme === option.id"
+                [class.active]="activeTheme === option.id"
+                (click)="selectTheme.emit(option.id)"
+              >
+                <mat-icon aria-hidden="true">{{ option.icon }}</mat-icon>
+                <span class="theme-option-label">{{ option.label }}</span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+      <div class="topbar-actions" role="group" aria-label="Acoes rapidas">
+        <button class="icon-button" type="button" aria-label="Atualizar">
+          <mat-icon aria-hidden="true">refresh</mat-icon>
+        </button>
+        <button class="icon-button" type="button" aria-label="Mensagens">
+          <mat-icon aria-hidden="true">mail</mat-icon>
+        </button>
+        <button class="icon-button" type="button" aria-label="Favoritos">
+          <mat-icon aria-hidden="true">star_border</mat-icon>
+        </button>
+        <button class="icon-button icon-button--badge" type="button" aria-label="Notificacoes">
+          <mat-icon aria-hidden="true">notifications</mat-icon>
+          <span class="icon-badge" aria-hidden="true"></span>
+        </button>
+        <button class="icon-button" type="button" aria-label="Perfil">
+          <mat-icon aria-hidden="true">account_circle</mat-icon>
+        </button>
+      </div>
+      <button class="coop-pill" type="button">
+        <mat-icon aria-hidden="true">how_to_vote</mat-icon>
+        Cooperativa Alfa
+      </button>
+    </div>
+  </header>
+
+  <div class="shell-body">
+    <aside class="sidebar">
+      <nav
+        class="side-nav"
+        aria-label="Navegacao principal"
+        (mouseenter)="loadRemoteMenus.emit()"
+        (focusin)="loadRemoteMenus.emit()"
+        (click)="loadRemoteMenus.emit()"
+      >
+        @for (group of menuGroups; track group.id) {
+          <div class="side-group" role="group" [attr.aria-label]="group.label">
+            @for (item of group.items; track item.path) {
+              <a
+                class="side-link"
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="item.exact ? exactMatchOptions : partialMatchOptions"
+              >
+                @if (item.icon) {
+                  <mat-icon class="side-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+                }
+                <span class="side-text">{{ item.label }}</span>
+              </a>
+            }
+          </div>
+        }
+        @if (menuLoading) {
+          <span class="side-status">Carregando apps...</span>
+        }
+        @if (menuError) {
+          <span class="side-status side-status--error">{{ menuError }}</span>
+          <button class="side-retry" type="button" (click)="loadRemoteMenus.emit(true)">
+            <mat-icon class="side-icon" aria-hidden="true">autorenew</mat-icon>
+            Recarregar
+          </button>
+        }
+      </nav>
+    </aside>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  @if (activeRemoteStatus; as status) {
+    <section class="statusbar">
+      <div class="statusbar-header">
+        <span class="statusbar-title">Status dos remotes</span>
+        <div class="statusbar-active">
+          <span
+            class="status-pill"
+            [style.--status-accent]="status.accent"
+            [attr.data-status]="status.status"
+          >
+            <span class="status-dot" aria-hidden="true"></span>
+            {{ status.label }}
+          </span>
+          @if (status.kind === 'web-component') {
+            <span class="status-badge" [style.--status-accent]="status.accent">
+              Web Component
+            </span>
+          }
+          <span class="status-meta">Angular {{ status.angular || '—' }}</span>
+          @for (lib of status.libs; track lib.name) {
+            <span class="status-meta">{{ lib.name }} {{ lib.version }}</span>
+          }
+          @for (stat of status.stats; track stat.name) {
+            <span class="status-meta">{{ stat.name }} {{ stat.value }}</span>
+          }
+        </div>
+      </div>
+      <div class="statusbar-list">
+        @for (remote of remoteStatusItems; track remote.name) {
+          <article
+            class="status-card"
+            [style.--status-accent]="remote.accent"
+            [class.is-active]="status.name === remote.name"
+            [class.is-missing]="remote.status === 'missing'"
+            [class.is-error]="remote.status === 'error'"
+            [class.is-loading]="remote.status === 'loading'"
+            [attr.title]="remote.url || ''"
+          >
+            <div class="status-card-header">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="status-name">{{ remote.label }}</span>
+              @if (remote.kind === 'web-component') {
+                <span class="status-badge">Web Component</span>
+              }
+              <span class="status-state">{{ remote.statusLabel }}</span>
+            </div>
+            <div class="status-line">Angular {{ remote.angular || '—' }}</div>
+            <div class="status-libs">
+              @if (remote.libs.length) {
+                @for (lib of remote.libs; track lib.name) {
+                  <span>{{ lib.name }} {{ lib.version }}</span>
+                }
+              } @else {
+                <span class="status-empty">Sem libs reportadas</span>
+              }
+            </div>
+            @if (remote.stats.length) {
+              <div class="status-stats">
+                @for (stat of remote.stats; track stat.name) {
+                  <span>{{ stat.name }} {{ stat.value }}</span>
+                }
+              </div>
+            }
+          </article>
+        }
+      </div>
+    </section>
+  }
+
+  <app-toast-host></app-toast-host>
+  <app-drawer-host></app-drawer-host>
+
+  @if (remoteLoading) {
+    <div
+      class="remote-loading"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      [style.--remote-accent]="remoteLoadingAccent || 'var(--shell-primary)'"
+    >
+      <div class="remote-loading__card">
+        <div class="remote-loading__header">
+          <div class="remote-loading__badge" aria-hidden="true">
+            <mat-icon aria-hidden="true">{{ remoteLoadingIcon }}</mat-icon>
+          </div>
+          <div class="remote-loading__heading">
+            <span class="remote-loading__eyebrow">Carregando modulo</span>
+            <h2 class="remote-loading__title">{{ remoteLoadingLabel }}</h2>
+            <p class="remote-loading__subtitle">Preparando recursos e sincronizando tema.</p>
+          </div>
+        </div>
+        <div class="remote-loading__progress" aria-hidden="true"></div>
+        <div class="remote-loading__steps" aria-hidden="true">
+          <span style="--step-delay: 0s;">Validando conexoes</span>
+          <span style="--step-delay: 1s;">Carregando componentes</span>
+          <span style="--step-delay: 2s;">Aplicando tema Material</span>
+        </div>
+        <div class="remote-loading__hint">Isso pode levar alguns segundos.</div>
+      </div>
+    </div>
+  }
+</div>

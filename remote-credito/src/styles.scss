@@ -1,0 +1,138 @@
+@use '@angular/material' as mat;
+
+$credito-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette
+  ),
+  typography: (
+    plain-family: (Roboto, "Helvetica Neue", Arial, sans-serif),
+    brand-family: (Roboto, "Helvetica Neue", Arial, sans-serif)
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+$credito-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette
+  ),
+  typography: (
+    plain-family: (Roboto, "Helvetica Neue", Arial, sans-serif),
+    brand-family: (Roboto, "Helvetica Neue", Arial, sans-serif)
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+@mixin credito-token-alignment() {
+  /* Align Material system tokens with shell theme tokens. */
+  --mat-sys-primary: var(--mfe-primary, #2f6fed);
+  --mat-sys-on-primary: var(--color-on-primary, #ffffff);
+  --mat-sys-primary-container: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 18%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-on-primary-container: var(--mfe-text, #1d2b36);
+  --mat-sys-secondary: var(--mfe-primary, #2f6fed);
+  --mat-sys-on-secondary: var(--color-on-primary, #ffffff);
+  --mat-sys-secondary-container: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 14%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-on-secondary-container: var(--mfe-text, #1d2b36);
+  --mat-sys-tertiary: var(--mfe-primary, #2f6fed);
+  --mat-sys-on-tertiary: var(--color-on-primary, #ffffff);
+  --mat-sys-tertiary-container: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 12%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-on-tertiary-container: var(--mfe-text, #1d2b36);
+  --mat-sys-surface: var(--mfe-surface, #ffffff);
+  --mat-sys-surface-tint: var(--mfe-primary, #2f6fed);
+  --mat-sys-on-surface: var(--mfe-text, #1d2b36);
+  --mat-sys-surface-variant: var(--mfe-surface-muted, #f6f7f9);
+  --mat-sys-on-surface-variant: var(--mfe-text-muted, #51606a);
+  --mat-sys-surface-container: var(--mfe-surface-muted, #f6f7f9);
+  --mat-sys-surface-container-low: var(--mfe-surface, #ffffff);
+  --mat-sys-surface-container-lowest: var(--mfe-surface, #ffffff);
+  --mat-sys-surface-container-high: color-mix(
+    in srgb,
+    var(--mfe-surface-muted, #f6f7f9) 80%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-surface-container-highest: color-mix(
+    in srgb,
+    var(--mfe-surface-muted, #f6f7f9) 65%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-surface-bright: var(--mfe-surface, #ffffff);
+  --mat-sys-surface-dim: var(--mfe-surface-muted, #f6f7f9);
+  --mat-sys-background: var(--mfe-surface, #ffffff);
+  --mat-sys-on-background: var(--mfe-text, #1d2b36);
+  --mat-sys-outline: var(--mfe-border, #e5e9ef);
+  --mat-sys-outline-variant: var(--mfe-border-strong, #d5dae2);
+  --mat-sys-error: var(--color-denotative-error-default, #f7406c);
+  --mat-sys-on-error: #ffffff;
+  --mat-sys-error-container: color-mix(
+    in srgb,
+    var(--color-denotative-error-default, #f7406c) 18%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-on-error-container: var(--mfe-text, #1d2b36);
+  --mat-sys-neutral-variant20: color-mix(
+    in srgb,
+    var(--mfe-text, #1d2b36) 20%,
+    var(--mfe-surface, #ffffff)
+  );
+  --mat-sys-neutral10: var(--mfe-text, #1d2b36);
+
+  /* MDC fallback tokens */
+  --mdc-theme-primary: var(--mfe-primary, #2f6fed);
+  --mdc-theme-on-primary: var(--color-on-primary, #ffffff);
+  --mdc-theme-secondary: var(--mfe-primary, #2f6fed);
+  --mdc-theme-on-secondary: var(--color-on-primary, #ffffff);
+  --mdc-theme-surface: var(--mfe-surface, #ffffff);
+  --mdc-theme-on-surface: var(--mfe-text, #1d2b36);
+  --mdc-theme-error: var(--color-denotative-error-default, #f7406c);
+  --mdc-theme-on-error: #ffffff;
+}
+
+@mixin credito-light-scope() {
+  @include mat.all-component-themes($credito-light-theme);
+  @include credito-token-alignment();
+  color-scheme: light;
+}
+
+@mixin credito-dark-scope() {
+  @include mat.all-component-colors($credito-dark-theme);
+  @include credito-token-alignment();
+  color-scheme: dark;
+}
+
+/* Global styles for the remote-credito element build. */
+remote-credito {
+  @include credito-light-scope();
+}
+
+.aurora-dark remote-credito,
+remote-credito[data-theme='aurora-dark'] {
+  @include credito-dark-scope();
+}
+
+.cdk-overlay-container.remote-credito-overlay {
+  @include credito-light-scope();
+}
+
+.aurora-dark .cdk-overlay-container.remote-credito-overlay,
+.cdk-overlay-container.remote-credito-overlay[data-theme='aurora-dark'] {
+  @include credito-dark-scope();
+}

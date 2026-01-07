@@ -1,0 +1,34 @@
+{
+  "name": "remote-credito",
+  "label": "Credito (v19)",
+  "angular": "19.x",
+  "libs": {
+    "@angular/core": "19.x",
+    "@angular/forms": "19.x",
+    "@angular/material": "19.x",
+    "@angular/cdk": "19.x",
+    "rxjs": "7.8"
+  },
+  "stats": {
+    "type": "element",
+    "port": 4304,
+    "routes": 3,
+    "menuItems": 3
+  },
+  "integration": {
+    "protocol": "shell-bridge",
+    "version": "1.0.0",
+    "requiredShellCapabilities": [
+      "openDrawer",
+      "navigate",
+      "track",
+      "toast",
+      "capabilities"
+    ]
+  },
+  "element": {
+    "name": "remote-credito",
+    "entry": "main.js",
+    "style": "styles.css"
+  }
+}

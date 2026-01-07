@@ -1,0 +1,9 @@
+@use '../../shared-ui-lib/src/lib/material-theme' as mfe-theme;
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import 'shared-ui-lib/tokens.css';
+
+@include mfe-theme.mfe-material-theme();
+
+/* Global styles for remote-gde. */

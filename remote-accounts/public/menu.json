@@ -1,0 +1,28 @@
+{
+  "group": {
+    "id": "conta-corrente",
+    "label": "Conta Corrente",
+    "order": 40
+  },
+  "items": [
+    {
+      "label": "Visao geral",
+      "path": "/conta-corrente",
+      "icon": "account_balance_wallet",
+      "order": 40,
+      "exact": true
+    },
+    {
+      "label": "Extratos e movimentacoes",
+      "path": "/conta-corrente/extratos",
+      "icon": "list_alt",
+      "order": 41
+    },
+    {
+      "label": "Limites e bloqueios",
+      "path": "/conta-corrente/limites-e-bloqueios",
+      "icon": "lock",
+      "order": 42
+    }
+  ]
+}

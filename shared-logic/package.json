@@ -1,0 +1,36 @@
+{
+  "name": "shared-logic",
+  "version": "1.2.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "default": "./dist/core.js"
+    },
+    "./angular": {
+      "types": "./dist/angular.d.ts",
+      "default": "./dist/angular.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@angular/core": ">=19 <21"
+  },
+  "devDependencies": {
+    "@angular/core": "^20.0.0",
+    "typescript": "~5.8.0"
+  }
+}

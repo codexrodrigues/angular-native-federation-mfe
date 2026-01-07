@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+/dist/
+**/dist/
+/out/
+**/out/
+/coverage/
+**/coverage/
+/.angular/
+**/.angular/
+/tmp/
+**/tmp/
+
+# Caches
+/.npm-cache/
+/.cache/
+**/.cache/
+.eslintcache
+.stylelintcache
+.nyc_output/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Packages
+*.tgz
+
+# Local docs drafts
+artigo_revisado_*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+*.iml
+.vscode/

@@ -1,0 +1,5 @@
+{
+  "remote-sales": "http://localhost:4201/remoteEntry.json",
+  "remote-gde": "http://localhost:4202/remoteEntry.json",
+  "remote-accounts": "http://localhost:4203/remoteEntry.json"
+}

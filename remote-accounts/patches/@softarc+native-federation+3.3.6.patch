@@ -1,0 +1,21 @@
+diff --git a/node_modules/@softarc/native-federation/src/lib/core/bundle-exposed-and-mappings.js b/node_modules/@softarc/native-federation/src/lib/core/bundle-exposed-and-mappings.js
+index 0000000..0000000 100644
+--- a/node_modules/@softarc/native-federation/src/lib/core/bundle-exposed-and-mappings.js
++++ b/node_modules/@softarc/native-federation/src/lib/core/bundle-exposed-and-mappings.js
+@@ -42,5 +42,16 @@
+         }
+         catch (error) {
+             logger_1.logger.error('Error building federation artefacts');
++            if (error instanceof Error) {
++                logger_1.logger.error(error.stack || error.message);
++            }
++            else {
++                try {
++                    logger_1.logger.error(JSON.stringify(error));
++                }
++                catch (_a) {
++                    logger_1.logger.error(String(error));
++                }
++            }
+             throw error;
+         }

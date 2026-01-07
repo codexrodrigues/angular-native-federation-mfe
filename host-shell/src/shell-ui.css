@@ -1,0 +1,47 @@
+.mfe-grid .mat-mdc-header-row {
+  background: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 14%,
+    var(--mfe-surface, #ffffff)
+  );
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--mfe-primary, #2f6fed) 22%, var(--mfe-border, #e5e9ef));
+}
+
+.mfe-grid .mat-mdc-header-cell {
+  font-weight: var(--font-weight-semi-bold, 600);
+  color: color-mix(in srgb, var(--mfe-primary, #2f6fed) 72%, var(--mfe-text, #1d2b36));
+  border-color: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 22%,
+    var(--mfe-border, #e5e9ef)
+  );
+}
+
+.mfe-grid .mat-mdc-row:nth-child(even) .mat-mdc-cell {
+  background: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 4%,
+    var(--mfe-surface, #ffffff)
+  );
+}
+
+.mfe-grid .mat-mdc-row:hover .mat-mdc-cell {
+  background: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 8%,
+    var(--mfe-surface, #ffffff)
+  );
+}
+
+.mfe-grid .mat-mdc-row.is-selected .mat-mdc-cell {
+  background: color-mix(
+    in srgb,
+    var(--mfe-primary, #2f6fed) 18%,
+    var(--mfe-surface, #ffffff)
+  );
+}
+
+.mfe-grid .mat-mdc-cell {
+  border-color: var(--mfe-border, #e5e9ef);
+}

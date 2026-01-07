@@ -1,0 +1,28 @@
+{
+  "group": {
+    "id": "credito",
+    "label": "Credito",
+    "order": 50
+  },
+  "items": [
+    {
+      "label": "Simulacao",
+      "path": "/credito",
+      "icon": "credit_score",
+      "order": 50,
+      "exact": true
+    },
+    {
+      "label": "Analise de risco",
+      "path": "/credito/analise",
+      "icon": "analytics",
+      "order": 51
+    },
+    {
+      "label": "Painel da carteira",
+      "path": "/credito/painel",
+      "icon": "dashboard",
+      "order": 52
+    }
+  ]
+}

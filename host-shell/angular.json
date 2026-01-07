@@ -1,0 +1,103 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"cli": {
+		"packageManager": "npm",
+		"analytics": false
+	},
+	"newProjectRoot": "projects",
+	"projects": {
+		"host-shell": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "",
+			"sourceRoot": "src",
+			"prefix": "app",
+			"targets": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"configurations": {
+						"production": {
+							"target": "host-shell:esbuild:production"
+						},
+						"development": {
+							"target": "host-shell:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "host-shell:esbuild:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4200
+					}
+				},
+				"test": {
+					"builder": "@angular/build:unit-test"
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
+					"options": {
+						"browser": "src/main.ts",
+						"tsConfig": "tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "public"
+							}
+						],
+						"styles": [
+							"src/styles.scss"
+						],
+						"polyfills": [
+							"es-module-shims",
+							"@angular/localize/init"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "1200kB",
+									"maximumError": "1500kB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "8kB",
+									"maximumError": "14kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "host-shell:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "host-shell:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				}
+			}
+		}
+	}
+}

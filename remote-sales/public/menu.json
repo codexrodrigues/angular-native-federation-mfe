@@ -1,0 +1,16 @@
+{
+  "group": {
+    "id": "sales",
+    "label": "Vendas",
+    "order": 20
+  },
+  "items": [
+    {
+      "label": "Visao geral",
+      "path": "/sales",
+      "icon": "shopping_cart",
+      "order": 20,
+      "exact": true
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "group": {
+    "id": "gde",
+    "label": "GDE",
+    "order": 30
+  },
+  "items": [
+    {
+      "label": "Visao geral",
+      "path": "/gde",
+      "icon": "work",
+      "order": 30,
+      "exact": true
+    },
+    {
+      "label": "Contas a pagar",
+      "path": "/gde/contas-a-pagar",
+      "icon": "request_quote",
+      "order": 31
+    },
+    {
+      "label": "Inclusao parcela a pagar",
+      "path": "/gde/inclusao-parcela-a-pagar",
+      "icon": "note_add",
+      "order": 32
+    },
+    {
+      "label": "Alteracao parcela a pagar",
+      "path": "/gde/alteracao-parcela-a-pagar",
+      "icon": "autorenew",
+      "order": 33
+    },
+    {
+      "label": "Adiantamento de pagamento",
+      "path": "/gde/adiantamento-de-pagamento",
+      "icon": "add_circle",
+      "order": 34
+    },
+    {
+      "label": "Migracao Legado",
+      "path": "/gde/legacy-form/new",
+      "icon": "desktop_windows",
+      "order": 35
+    }
+  ]
+}
