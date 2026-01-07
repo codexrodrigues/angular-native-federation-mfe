@@ -98,9 +98,12 @@ Trade-offs:
 - Erro de integridade no `shared-logic.tgz`: regerar via `start-demo` e conferir lockfiles. Fonte: `start-demo.ps1`, `start-demo.sh`.
 
 ## Docs
-- Arquitetura: `docs/ARCHITECTURE.md`
-- Desenvolvimento: `docs/DEVELOPMENT.md`
-- Deploy: `docs/DEPLOYMENT.md`
+- Arquitetura: runtime config, manifest, roteamento e contratos. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- Desenvolvimento: setup local, fluxos e boas praticas. [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md)
+- Deploy: build, cache e runtime config. [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+
+## GitHub Topics
+angular, microfrontend, micro-frontends, native-federation, angular-architects, module-federation, esm, import-maps, angular-elements, web-components, material-design, design-system
 
 ## Issues / Improvements
 - `start-demo.ps1` sempre inicia dist servers; `start-demo.sh` usa `--serve` (inconsistencia de fluxo). Fontes: `start-demo.ps1`, `start-demo.sh`.
